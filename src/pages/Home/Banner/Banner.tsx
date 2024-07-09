@@ -11,8 +11,15 @@ import sliderImage1 from "@/assets/slider-image-1.jpg";
 import sliderImage2 from "@/assets/slider-image-2.jpg";
 import sliderImage3 from "@/assets/slider-image-3.jpg";
 
+type SliderDataType = {
+  id: number;
+  image: string;
+  heading: string;
+  description: string;
+};
+
 function Banner() {
-  const sliderData = [
+  const sliderData: SliderDataType[] = [
     {
       id: 1,
       image: sliderImage1,
