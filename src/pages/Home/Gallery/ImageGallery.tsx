@@ -66,6 +66,7 @@ function ImageGallery() {
       <div className="rounded-md p-4 columns-1 md:columns-4 gap-3 space-y-3 max-w-[1200px] mx-auto ">
         {imageGallery.map((image) => (
           <img
+            key={image.id}
             src={image.img}
             alt="image"
             className="bg-gray-200 break-inside-avoid w-full object-cover object-center"
