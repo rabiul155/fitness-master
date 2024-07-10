@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import { Link } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import { FaXmark, FaBarsStaggered } from "react-icons/fa6";
 
 type NavItem = {
@@ -11,11 +11,7 @@ type NavItem = {
 function Navbar() {
   const navItem: NavItem[] = [
     {
-      nav: "Home",
-      link: "/",
-    },
-    {
-      nav: "product",
+      nav: "Product",
       link: "/product",
     },
     {
@@ -40,19 +36,31 @@ function Navbar() {
   const closeNav = () => {
     setNav(false);
   };
+
+  const location = useLocation();
+  const currentPath = location.pathname;
+  console.log(currentPath);
+
   return (
     <div className="sticky top-0 z-50">
       <div className=" h-[10vh] bg-[#f6f7fb] shadow-md">
         <div className=" flex h-full justify-between items-center mx-auto w-[90%]">
           <div className=" flex items-center gap-12">
-            <h1 className="text-xl font-bold flex gap-2 ">
+            <Link to={"/"} className="text-xl font-bold flex gap-2 ">
               Fitness
               <span className="  text-yellow-500">Master</span>
-            </h1>
+            </Link>
             <ul className="hidden md:flex justify-center items-center gap-6">
               {navItem.map((item) => (
-                <li className=" font-medium" key={item.nav}>
-                  <Link to={"/#"}>{item.nav}</Link>
+                <li
+                  className={`${
+                    currentPath === item.link
+                      ? "text-yellow-500"
+                      : "text-gray-800"
+                  } font-medium`}
+                  key={item.nav}
+                >
+                  <Link to={item.link}>{item.nav}</Link>
                 </li>
               ))}
             </ul>
@@ -81,10 +89,17 @@ function Navbar() {
               <FaXmark className=" h-5 w-5" />
             </button>
           </div>
-          <ul className=" flex flex-col h-full gap-4 z-50">
+          <ul className=" flex flex-col mt-8 h-full gap-4 z-50">
             {navItem.map((item) => (
-              <li className="font-medium" key={item.nav}>
-                <Link to={"/#"}>{item.nav}</Link>
+              <li
+                className={`${
+                  currentPath === item.link
+                    ? "text-yellow-500"
+                    : "text-gray-800"
+                } font-medium`}
+                key={item.nav}
+              >
+                <Link to={item.link}>{item.nav}</Link>
               </li>
             ))}
           </ul>

@@ -11,6 +11,7 @@ import ProductManagement from "@/pages/ProductManagement";
 import Cart from "@/pages/Cart";
 import Checkout from "@/pages/Checkout";
 import NotFound from "@/pages/NotFound";
+import About from "@/pages/About";
 
 const router = createBrowserRouter([
   {
@@ -44,6 +45,10 @@ const router = createBrowserRouter([
       {
         path: "cart",
         element: <Cart />,
+      },
+      {
+        path: "about",
+        element: <About />,
       },
     ],
   },
