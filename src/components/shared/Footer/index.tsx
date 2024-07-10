@@ -43,7 +43,7 @@ function Footer() {
             <li className=" my-3">Privacy Policy </li>
             <li className=" my-3">Terms and Services </li>
             <li className=" my-3">FAQ </li>
-            <li className=" my-3">Contuct </li>
+            <li className=" my-3">Contact </li>
             <li className=" my-3">Services </li>
           </ul>
         </div>
