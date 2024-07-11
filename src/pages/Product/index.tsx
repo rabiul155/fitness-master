@@ -1,9 +1,9 @@
 import ProductCard from "@/components/shared/Card/ProductCard";
-import { useProductQuery } from "@/redux/features/product/productApi";
+import { useGetProductQuery } from "@/redux/features/product/productApi";
 import { ProductType } from "@/types";
 
 function Product() {
-  const { data, isLoading } = useProductQuery({});
+  const { data, isLoading } = useGetProductQuery({});
   if (isLoading) {
     return <div>Loading...</div>;
   }

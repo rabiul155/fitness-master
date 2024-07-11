@@ -16,7 +16,7 @@ function Navbar() {
     },
     {
       nav: "Manage Product",
-      link: "/product/management",
+      link: "/manage",
     },
     {
       nav: "Cart",
@@ -39,7 +39,6 @@ function Navbar() {
 
   const location = useLocation();
   const currentPath = location.pathname;
-  console.log(currentPath);
 
   return (
     <div className="sticky top-0 z-50">
@@ -54,7 +53,7 @@ function Navbar() {
               {navItem.map((item) => (
                 <li
                   className={`${
-                    currentPath === item.link
+                    currentPath.includes(item.link)
                       ? "text-yellow-500"
                       : "text-gray-800"
                   } font-medium`}
@@ -93,7 +92,7 @@ function Navbar() {
             {navItem.map((item) => (
               <li
                 className={`${
-                  currentPath === item.link
+                  currentPath.includes(item.link)
                     ? "text-yellow-500"
                     : "text-gray-800"
                 } font-medium`}
