@@ -27,7 +27,10 @@ function Product() {
     setPage(page);
   };
 
-  console.log(page);
+  const handleClearFilter = () => {
+    setQuery({});
+    setPage(1), setLimit(3);
+  };
 
   const handleSearchParams = (field: string, value: string) => {
     const payload = { ...query };
@@ -39,6 +42,7 @@ function Product() {
     <div className="my-6 flex flex-col gap-6">
       {/* filtering */}
       <Filtering
+        handleClearFilter={handleClearFilter}
         handleSearchParams={handleSearchParams}
         handleLimit={handleLimit}
       />

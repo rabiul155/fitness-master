@@ -1,6 +1,7 @@
 import React from "react";
 import SelectField from "../SelectField/SelectField";
 import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 
 const category = [
   {
@@ -44,6 +45,7 @@ const sortBy = [
 ];
 
 type FilteringProps = {
+  handleClearFilter: () => void;
   handleSearchParams: (field: string, value: string) => void;
   handleLimit: (field: string, value: string) => void;
 };
@@ -84,6 +86,13 @@ function Filtering(props: FilteringProps) {
             placeholder="Sort product"
             handleValueChange={(val) => props.handleSearchParams("sort", val)}
           />
+          <Button
+            variant="outline"
+            className="h-8"
+            onClick={props.handleClearFilter}
+          >
+            Clear Filer
+          </Button>
         </div>
       </div>
     </div>
