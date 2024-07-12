@@ -1,5 +1,6 @@
 import React from "react";
 import SelectField from "../SelectField/SelectField";
+import { Input } from "@/components/ui/input";
 
 const category = [
   {
@@ -59,6 +60,14 @@ function Filtering(props: FilteringProps) {
             handleValueChange={(val) =>
               props.handleSearchParams("category", val)
             }
+          />
+        </div>
+        <div>
+          <Input
+            className="w-64 h-8 border-0 outline-none ring-0 focus:ring-0 focus:outline-none"
+            type="text"
+            placeholder="Search..."
+            onChange={(e) => props.handleSearchParams("search", e.target.value)}
           />
         </div>
         <div className="flex gap-4">

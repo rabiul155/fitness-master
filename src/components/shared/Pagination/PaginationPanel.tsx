@@ -6,7 +6,6 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
-import { useEffect } from "react";
 
 type PaginationProps = {
   limit: number;
@@ -34,7 +33,7 @@ function PaginationPanel(props: PaginationProps) {
         </PaginationItem>
 
         {Array.from({ length: totalPage }).map((page, index) => (
-          <PaginationItem>
+          <PaginationItem key={index}>
             <PaginationLink
               className="cursor-pointer"
               isActive={props.page === index + 1}
