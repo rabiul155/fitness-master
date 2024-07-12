@@ -18,16 +18,16 @@ const category = [
 
 const limit = [
   {
-    label: "10",
-    value: "10",
+    label: "2",
+    value: "2",
   },
   {
-    label: "20",
-    value: "20",
+    label: "3",
+    value: "3",
   },
   {
-    label: "30",
-    value: "30",
+    label: "4",
+    value: "4",
   },
 ];
 
@@ -44,6 +44,7 @@ const sortBy = [
 
 type FilteringProps = {
   handleSearchParams: (field: string, value: string) => void;
+  handleLimit: (field: string, value: string) => void;
 };
 
 function Filtering(props: FilteringProps) {
@@ -66,7 +67,7 @@ function Filtering(props: FilteringProps) {
             classNames="w-20"
             items={limit}
             placeholder="Limit"
-            handleValueChange={(val) => props.handleSearchParams("limit", val)}
+            handleValueChange={(val) => props.handleLimit("limit", val)}
           />
           <SelectField
             label="Sort By"

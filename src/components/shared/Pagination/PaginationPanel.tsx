@@ -1,43 +1,61 @@
 import {
   Pagination,
   PaginationContent,
-  PaginationEllipsis,
   PaginationItem,
   PaginationLink,
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
+import { useEffect } from "react";
 
 type PaginationProps = {
-  length?: string;
-  handleSearchParams?: (field: string, value: string) => void;
+  limit: number;
+  length: number;
+  page: number;
+  handlePage: (value: number) => void;
 };
 
 function PaginationPanel(props: PaginationProps) {
+  const totalPage = Math.ceil(props.length / props.limit);
+
   return (
     <Pagination>
       <PaginationContent>
         {/* previous */}
         <PaginationItem>
-          <PaginationPrevious />
+          <PaginationPrevious
+            className={`cursor-pointer ${
+              props.page > 1 ? "" : "text-gray-400 "
+            }`}
+            onClick={() => {
+              if (props.page > 1) return props.handlePage(props.page - 1);
+            }}
+          />
         </PaginationItem>
 
-        {/* main */}
-        <PaginationItem>
-          <PaginationLink href="#">1</PaginationLink>
-        </PaginationItem>
-        <PaginationItem>
-          <PaginationLink href="#" isActive>
-            2
-          </PaginationLink>
-        </PaginationItem>
-        <PaginationItem>
-          <PaginationLink href="#">3</PaginationLink>
-        </PaginationItem>
+        {Array.from({ length: totalPage }).map((page, index) => (
+          <PaginationItem>
+            <PaginationLink
+              className="cursor-pointer"
+              isActive={props.page === index + 1}
+              onClick={() => props.handlePage(index + 1)}
+            >
+              {index + 1}
+            </PaginationLink>
+          </PaginationItem>
+        ))}
 
         {/* next */}
         <PaginationItem>
-          <PaginationNext />
+          <PaginationNext
+            className={`cursor-pointer ${
+              props.page < totalPage ? "" : "text-gray-400"
+            }`}
+            onClick={() => {
+              if (props.page < totalPage)
+                return props.handlePage(props.page + 1);
+            }}
+          />
         </PaginationItem>
       </PaginationContent>
     </Pagination>

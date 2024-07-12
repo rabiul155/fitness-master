@@ -11,11 +11,23 @@ interface QueryType {
 }
 
 function Product() {
+  const [limit, setLimit] = useState(3);
+  const [page, setPage] = useState(1);
   const [query, setQuery] = useState<QueryType>({});
   const { data, isLoading } = useGetProductQuery(query);
   if (isLoading) {
     return <div>Loading...</div>;
   }
+
+  const handleLimit = (field: string, value: string) => {
+    setLimit(Number(value));
+  };
+
+  const handlePage = (page: number) => {
+    setPage(page);
+  };
+
+  console.log(page);
 
   const handleSearchParams = (field: string, value: string) => {
     const payload = { ...query };
@@ -26,14 +38,19 @@ function Product() {
   return (
     <div className="my-6 flex flex-col gap-6">
       {/* filtering */}
-      <Filtering handleSearchParams={handleSearchParams} />
+      <Filtering
+        handleSearchParams={handleSearchParams}
+        handleLimit={handleLimit}
+      />
 
       {/* card section */}
       <div className="w-[90%] mx-auto grid grid-cols-1 md:grid-cols-3 gap-12">
         {data.data.length ? (
-          data.data.map((product: ProductType) => (
-            <ProductCard key={product._id} product={product}></ProductCard>
-          ))
+          data.data
+            .slice((page - 1) * limit, page * limit)
+            .map((product: ProductType) => (
+              <ProductCard key={product._id} product={product}></ProductCard>
+            ))
         ) : (
           <div className="text-center">No Data Found</div>
         )}
@@ -44,7 +61,9 @@ function Product() {
         <div>
           <PaginationPanel
             length={data.data.length}
-            handleSearchParams={handleSearchParams}
+            limit={limit}
+            page={page}
+            handlePage={handlePage}
           />
         </div>
       )}
