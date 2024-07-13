@@ -11,3 +11,9 @@ export type ProductType = {
   createdAt: string;
   updatedAt: string;
 };
+
+export type CartProductType = {
+  _id: string;
+  product: ProductType;
+  quantity: number;
+};

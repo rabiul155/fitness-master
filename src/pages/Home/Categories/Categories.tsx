@@ -11,27 +11,32 @@ import image1 from "@/assets/dumbbles.jpg";
 import image2 from "@/assets/treadmills.jpg";
 import image3 from "@/assets/weight-plate.jfif";
 import image4 from "@/assets/cycle.jpg";
+import { Link } from "react-router-dom";
 
 const categoriesData = [
   {
     id: 1,
     name: "Dumbbells",
     image: image1,
+    link: "products?category=Dumbbells",
   },
   {
     id: 2,
     name: "Treadmills",
     image: image2,
+    link: "products?category=Treadmills",
   },
   {
     id: 3,
     name: "Weight Plates",
     image: image3,
+    link: "products?category=Weight+Plates",
   },
   {
     id: 4,
     name: "Exercise Bike",
     image: image4,
+    link: "products?category=Exercise+Bike",
   },
 ];
 
@@ -46,7 +51,7 @@ function Categories() {
       <CarouselContent className="flex">
         {categoriesData.map((category) => (
           <CarouselItem key={category.id} className="md:basis-1/2 lg:basis-1/3">
-            <div className="p-1">
+            <Link to={category.link} className="p-1 cursor-pointer">
               <Card>
                 <CardContent className="relative flex aspect-square items-center justify-center p-0 rounded-md overflow-hidden">
                   <img
@@ -59,7 +64,7 @@ function Categories() {
                   </div>
                 </CardContent>
               </Card>
-            </div>
+            </Link>
           </CarouselItem>
         ))}
       </CarouselContent>

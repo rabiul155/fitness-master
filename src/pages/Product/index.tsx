@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { ProductType } from "@/types";
 import ProductCard from "@/components/shared/Card/ProductCard";
 import Filtering from "@/components/shared/Filtering/Filtering";
 import { useGetProductQuery } from "@/redux/features/product/productApi";
 import PaginationPanel from "@/components/shared/Pagination/PaginationPanel";
+import { useSearchParams } from "react-router-dom";
 
 interface QueryType {
   [key: string]: string;
@@ -14,6 +15,16 @@ function Product() {
   const [limit, setLimit] = useState(3);
   const [page, setPage] = useState(1);
   const [query, setQuery] = useState<QueryType>({});
+
+  const [searchParams] = useSearchParams();
+  const category = searchParams.get("category");
+
+  useEffect(() => {
+    if (category) {
+      setQuery({ category: category });
+    }
+  }, [category]);
+
   const { data, isLoading } = useGetProductQuery(query);
   if (isLoading) {
     return <div>Loading...</div>;

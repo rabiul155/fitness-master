@@ -5,16 +5,20 @@ import { Button } from "@/components/ui/button";
 
 const category = [
   {
-    label: "Fitness Equipment",
-    value: "Fitness Equipment",
+    label: "Dumbbells",
+    value: "Dumbbells",
   },
   {
-    label: "Fitness Equipment2",
-    value: "Fitness Equipment2",
+    label: "Treadmills",
+    value: "Treadmills",
   },
   {
-    label: "Fitness Equipment3",
-    value: "Fitness Equipment3",
+    label: "Weight Plates",
+    value: "Weight Plates",
+  },
+  {
+    label: "Exercise Bike",
+    value: "Exercise Bike",
   },
 ];
 

@@ -11,8 +11,8 @@ type NavItem = {
 function Navbar() {
   const navItem: NavItem[] = [
     {
-      nav: "Product",
-      link: "/product",
+      nav: "Products",
+      link: "/products",
     },
     {
       nav: "Manage Product",

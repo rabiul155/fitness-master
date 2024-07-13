@@ -9,7 +9,25 @@ const cartApi = baseApi.injectEndpoints({
         body: payload,
       }),
     }),
+    getCartProduct: builder.query({
+      query: () => ({
+        url: "/carts",
+        method: "GET",
+      }),
+      providesTags: ["cart"],
+    }),
+    deleteCartProduct: builder.mutation({
+      query: (id) => ({
+        url: `/carts/${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["cart"],
+    }),
   }),
 });
 
-export const { useAddToCartMutation } = cartApi;
+export const {
+  useAddToCartMutation,
+  useGetCartProductQuery,
+  useDeleteCartProductMutation,
+} = cartApi;
