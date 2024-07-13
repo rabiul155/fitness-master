@@ -9,7 +9,7 @@ import Modal from "@/components/shared/Modal/Modal";
 import { toast } from "sonner";
 
 function Cart() {
-  const { data, isLoading } = useGetCartProductQuery({});
+  const { data, isLoading, refetch } = useGetCartProductQuery(null);
   const [deleteProduct, setDeleteProduct] = useState<CartProductType | null>();
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [deleteCartProduct] = useDeleteCartProductMutation();
@@ -20,6 +20,7 @@ function Cart() {
         await deleteCartProduct(deleteProduct._id as string);
         toast("Product deleted successfully");
       } catch (error) {
+        toast("Error deleting product");
         console.error("Failed to delete the cart product:", error);
       }
     }
@@ -30,6 +31,10 @@ function Cart() {
       setShowDeleteModal(true);
     }
   }, [deleteProduct]);
+
+  useEffect(() => {
+    refetch();
+  }, []);
 
   if (isLoading) {
     return "Loading...";

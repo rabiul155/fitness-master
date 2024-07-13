@@ -76,7 +76,7 @@ const Modal = (props: PropsType) => {
                       props.setShow(false);
                     }}
                   >
-                    Save
+                    Delete
                   </Button>
                 </div>
               </DialogPanel>

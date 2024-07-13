@@ -1,6 +1,8 @@
 import { CartProductType } from "@/types";
 import { FaTrashAlt } from "react-icons/fa";
 import img from "@/assets/benefit-2.jpg";
+import { useUpdateCartProductMutation } from "@/redux/features/cart/cartApi";
+import { toast } from "sonner";
 
 type PropsType = {
   cartProduct: CartProductType;
@@ -12,10 +14,32 @@ function CartProduct(props: PropsType) {
     cartProduct: { product, quantity },
   } = props;
 
+  const [updateCart, data] = useUpdateCartProductMutation();
+
   const totalPrice = product.price * quantity;
 
-  const handleDecrease = () => {};
-  const handleIncrease = () => {};
+  const handleDecrease = async () => {
+    try {
+      await updateCart({
+        id: props.cartProduct._id,
+        payload: { quantity: props.cartProduct.quantity - 1 },
+      });
+      toast("Updating complete");
+    } catch (error) {
+      toast("Error while updating");
+    }
+  };
+  const handleIncrease = async () => {
+    try {
+      await updateCart({
+        id: props.cartProduct._id,
+        payload: { quantity: props.cartProduct.quantity + 1 },
+      });
+      toast("Updating complete");
+    } catch (error) {
+      toast("Error while updating");
+    }
+  };
   return (
     <div className=" my-4">
       <div className=" bg-base-100 border rounded-lg shadow-md p-2 lg:flex justify-between ">
@@ -36,14 +60,20 @@ function CartProduct(props: PropsType) {
           <table className="border bg-base-200 border-collapse">
             <tbody>
               <tr className="">
-                <td className="px-[11px] text-xl pb-1 font-bold border-2">
-                  <button onClick={() => handleDecrease()}>-</button>
+                <td
+                  onClick={() => handleDecrease()}
+                  className="cursor-pointer px-[11px] text-xl pb-1 font-bold border-2"
+                >
+                  <span>-</span>
                 </td>
                 <td className="px-3 text-xl font-semibold border-2">
                   {quantity}
                 </td>
-                <td className="px-2 text-xl pb-1 font-bold border-2">
-                  <button onClick={() => handleIncrease()}>+</button>
+                <td
+                  onClick={() => handleIncrease()}
+                  className="cursor-pointer px-2 text-xl pb-1 font-bold border-2"
+                >
+                  <span>+</span>
                 </td>
               </tr>
             </tbody>
