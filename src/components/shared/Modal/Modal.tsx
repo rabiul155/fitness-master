@@ -12,19 +12,16 @@ import { FaXmark } from "react-icons/fa6";
 type PropsType = {
   show: boolean;
   title: string;
+  variant: "submit" | "delete";
   onConfirm: () => void;
-  setShow: (val: boolean) => void;
+  onClose: () => void;
   children: React.ReactNode;
 };
 
 const Modal = (props: PropsType) => {
   return (
     <Transition show={props.show} as={Fragment}>
-      <Dialog
-        as="div"
-        className="relative z-50"
-        onClose={() => props.setShow(false)}
-      >
+      <Dialog as="div" className="relative z-50" onClose={props.onClose}>
         <TransitionChild
           as={Fragment}
           enter="ease-out duration-300"
@@ -52,32 +49,39 @@ const Modal = (props: PropsType) => {
                 <DialogTitle className="font-bold">{props.title}</DialogTitle>
 
                 <button
-                  onClick={() => props.setShow(false)}
+                  onClick={props.onClose}
                   className="absolute top-2 right-2 p-2 rounded-full text-gray-800 hover:bg-gray-100"
                 >
                   <FaXmark size={20} />
                 </button>
-                <div className="py-8">{props.children}</div>
-
-                <div className="flex justify-between gap-4">
-                  <Button
-                    className="h-8 "
-                    variant={"secondary"}
-                    onClick={() => props.setShow(false)}
-                  >
-                    Cancel
-                  </Button>
-
-                  <Button
-                    variant={"destructive"}
-                    className="h-8"
-                    onClick={() => {
-                      props.onConfirm();
-                      props.setShow(false);
-                    }}
-                  >
-                    Delete
-                  </Button>
+                <div className="py-2">
+                  <hr />
+                  <div className="py-6">{props.children}</div>
+                  <hr />
+                </div>
+                <div className="flex justify-end gap-4">
+                  {props.variant === "submit" && (
+                    <Button
+                      variant={"secondary"}
+                      className="h-8"
+                      onClick={() => {
+                        props.onConfirm();
+                      }}
+                    >
+                      Submit
+                    </Button>
+                  )}
+                  {props.variant === "delete" && (
+                    <Button
+                      variant={"destructive"}
+                      className="h-8"
+                      onClick={() => {
+                        props.onConfirm();
+                      }}
+                    >
+                      Delete
+                    </Button>
+                  )}
                 </div>
               </DialogPanel>
             </TransitionChild>
