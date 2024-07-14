@@ -6,6 +6,7 @@ import Filtering from "@/components/shared/Filtering/Filtering";
 import { useGetProductQuery } from "@/redux/features/product/productApi";
 import PaginationPanel from "@/components/shared/Pagination/PaginationPanel";
 import { useSearchParams } from "react-router-dom";
+import Loading from "@/components/shared/Loading/Loading";
 
 interface QueryType {
   [key: string]: string;
@@ -27,7 +28,7 @@ function Product() {
 
   const { data, isLoading } = useGetProductQuery(query);
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <Loading />;
   }
 
   const handleLimit = (field: string, value: string) => {

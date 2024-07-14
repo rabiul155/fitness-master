@@ -8,6 +8,8 @@ import { CartProductType } from "@/types";
 import Modal from "@/components/shared/Modal/Modal";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
+import Loading from "@/components/shared/Loading/Loading";
 
 function Cart() {
   const { data, isLoading, refetch } = useGetCartProductQuery(null);
@@ -39,7 +41,7 @@ function Cart() {
   }, []);
 
   if (isLoading) {
-    return "Loading...";
+    return <Loading />;
   }
 
   const totalPrice = data?.data.reduce(
@@ -48,8 +50,6 @@ function Cart() {
     },
     0
   );
-
-  console.log(totalPrice);
 
   return (
     <div className="p-4 flex flex-col lg:flex-row gap-4">
@@ -95,7 +95,9 @@ function Cart() {
                 </span>
               </p>
               <div className="card-actions justify-end mt-4">
-                <Button className=" w-full">Proceed To Checkout</Button>
+                <Link to={"/checkout"}>
+                  <Button className="w-full">Proceed To Checkout</Button>
+                </Link>
               </div>
             </div>
           </div>

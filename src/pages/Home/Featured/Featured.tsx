@@ -1,11 +1,12 @@
 import ProductCard from "@/components/shared/Card/ProductCard";
+import Loading from "@/components/shared/Loading/Loading";
 import { useGetProductQuery } from "@/redux/features/product/productApi";
 import { ProductType } from "@/types";
 
 function Featured() {
   const { data, isLoading } = useGetProductQuery({});
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <Loading />;
   }
 
   return (
