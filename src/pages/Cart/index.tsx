@@ -14,7 +14,7 @@ import Loading from "@/components/shared/Loading/Loading";
 function Cart() {
   const { data, isLoading, refetch } = useGetCartProductQuery(null);
   const [deleteProduct, setDeleteProduct] = useState<CartProductType | null>();
-  const [showDeleteModal, setShowDeleteModal] = useState(false);
+
   const [deleteCartProduct] = useDeleteCartProductMutation();
 
   const handleConfirm = async () => {
@@ -31,12 +31,6 @@ function Cart() {
   };
 
   useEffect(() => {
-    if (deleteProduct) {
-      setShowDeleteModal(true);
-    }
-  }, [deleteProduct]);
-
-  useEffect(() => {
     refetch();
   }, []);
 
@@ -44,23 +38,23 @@ function Cart() {
     return <Loading />;
   }
 
+  if (data.data.length === 0) {
+    return (
+      <h2 className=" text-xl mt-12 font-bold text-center text-yellow-400 ">
+        You haven't Order Yet. Please, Order First
+      </h2>
+    );
+  }
+
   const totalPrice = data?.data.reduce(
     (sum: number, cartProduct: CartProductType) => {
-      return sum + cartProduct.quantity * cartProduct.product.price;
+      return sum + 1;
     },
     0
   );
 
   return (
     <div className="p-4 flex flex-col lg:flex-row gap-4">
-      {data.data?.length === 0 && (
-        <>
-          <h2 className=" text-xl mt-12 font-bold text-center text-yellow-400 ">
-            You haven't Order Yet. Please, Order First
-          </h2>
-        </>
-      )}
-
       <div className="w-full">
         {data.data?.map((cartProduct: CartProductType) => (
           <CartProduct
@@ -104,11 +98,12 @@ function Cart() {
         </div>
       )}
 
-      {showDeleteModal && (
+      {!!deleteProduct && (
         <Modal
           title="Delete Modal"
-          show={showDeleteModal}
-          setShow={setShowDeleteModal}
+          variant="delete"
+          show={!!deleteProduct}
+          onClose={() => setDeleteProduct(null)}
           onConfirm={handleConfirm}
         >
           Are you sure delete this product?
