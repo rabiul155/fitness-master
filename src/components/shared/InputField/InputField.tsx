@@ -5,7 +5,7 @@ type PropsType = {
   label: string;
   name: string;
   type?: string;
-  value: string;
+  value: string | number;
   className?: string;
   onChange: (e: ChangeEvent<any>) => void;
 };

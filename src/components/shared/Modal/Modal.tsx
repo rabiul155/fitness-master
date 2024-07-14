@@ -12,6 +12,7 @@ import { FaXmark } from "react-icons/fa6";
 type PropsType = {
   show: boolean;
   title: string;
+  type?: "default" | "form";
   variant: "submit" | "delete";
   onConfirm: () => void;
   onClose: () => void;
@@ -57,30 +58,34 @@ const Modal = (props: PropsType) => {
                 <div className="py-2">
                   <hr />
                   <div className="py-6">{props.children}</div>
-                  <hr />
-                </div>
-                <div className="flex justify-end gap-4">
-                  {props.variant === "submit" && (
-                    <Button
-                      variant={"secondary"}
-                      className="h-8"
-                      onClick={() => {
-                        props.onConfirm();
-                      }}
-                    >
-                      Submit
-                    </Button>
-                  )}
-                  {props.variant === "delete" && (
-                    <Button
-                      variant={"destructive"}
-                      className="h-8"
-                      onClick={() => {
-                        props.onConfirm();
-                      }}
-                    >
-                      Delete
-                    </Button>
+                  {props.type !== "form" && (
+                    <div>
+                      <hr />
+                      <div className="flex justify-end mt-4">
+                        {props.variant === "submit" && (
+                          <Button
+                            variant={"secondary"}
+                            className="h-8"
+                            onClick={() => {
+                              props.onConfirm();
+                            }}
+                          >
+                            Submit
+                          </Button>
+                        )}
+                        {props.variant === "delete" && (
+                          <Button
+                            variant={"destructive"}
+                            className="h-8"
+                            onClick={() => {
+                              props.onConfirm();
+                            }}
+                          >
+                            Delete
+                          </Button>
+                        )}
+                      </div>
+                    </div>
                   )}
                 </div>
               </DialogPanel>

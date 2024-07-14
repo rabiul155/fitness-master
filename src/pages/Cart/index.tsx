@@ -48,7 +48,7 @@ function Cart() {
 
   const totalPrice = data?.data.reduce(
     (sum: number, cartProduct: CartProductType) => {
-      return sum + 1;
+      return sum + cartProduct.product.price * cartProduct.quantity;
     },
     0
   );
@@ -72,7 +72,10 @@ function Cart() {
               <h2 className=" text-2xl font-bold text-center pb-2">Checkout</h2>
               <hr className="border border-gray-500" />
               <p className=" flex justify-between font-bold pt-2 pb-1 text-xl">
-                <span> Product Cost :</span> {totalPrice} <small>Bdt</small>
+                <span> Product Cost :</span>{" "}
+                <span>
+                  {totalPrice} <small>Bdt</small>
+                </span>
               </p>
               <p className="flex justify-between font-semibold py-1 text-lg">
                 <span> Shipping Cost : </span>

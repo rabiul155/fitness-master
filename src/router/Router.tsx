@@ -12,6 +12,8 @@ import Cart from "@/pages/Cart";
 import Checkout from "@/pages/Checkout";
 import NotFound from "@/pages/NotFound";
 import About from "@/pages/About";
+import AddProduct from "@/pages/ProductManagement/AddProduct/AddProduct";
+import ManageProductLayout from "@/layouts/ManageProductLayout";
 
 const router = createBrowserRouter([
   {
@@ -32,7 +34,17 @@ const router = createBrowserRouter([
       },
       {
         path: "manage",
-        element: <ProductManagement />,
+        element: <ManageProductLayout />,
+        children: [
+          {
+            index: true,
+            element: <ProductManagement />,
+          },
+          {
+            path: "add-product",
+            element: <AddProduct />,
+          },
+        ],
       },
       {
         path: "checkout",

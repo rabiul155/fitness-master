@@ -19,11 +19,14 @@ import { HiOutlineTrash } from "react-icons/hi";
 import Modal from "@/components/shared/Modal/Modal";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
+import AddProduct from "./AddProduct/AddProduct";
 
 function ProductManagement() {
   const [deleteProduct, setDeleteProduct] = useState("");
+  const [editProduct, setEditProduct] = useState<ProductType | null>();
   const { data, isLoading } = useGetProductQuery({});
   const [deleteProductApi] = useDeleteProductMutation();
+
   if (isLoading) {
     return <Loading />;
   }
@@ -39,11 +42,11 @@ function ProductManagement() {
       setDeleteProduct("");
     }
   };
+  const handleEditProduct = () => {};
 
   return (
     <div className="mx-4">
       <Table>
-        <TableCaption>A list of your products.</TableCaption>
         <TableHeader>
           <TableRow>
             <TableHead className="w-[40px]">Index</TableHead>
@@ -66,21 +69,40 @@ function ProductManagement() {
               <TableCell className="font-medium">{product.category}</TableCell>
               <TableCell className="font-medium">{product.price}</TableCell>
               <TableCell className="font-medium">{product.stock}</TableCell>
-              <TableCell className="font-medium flex gap-2 items-center ">
-                <div>
-                  <FaEdit className="size-4 cursor-pointer text-gray-500" />
-                </div>
-                <div>
-                  <HiOutlineTrash
-                    onClick={() => setDeleteProduct(product._id)}
-                    className="cursor-pointer text-red-500 size-5"
-                  />
+              <TableCell className="font-medium ">
+                <div className="flex gap-2 ">
+                  <div>
+                    <FaEdit
+                      onClick={() => setEditProduct(product)}
+                      className="size-4 mt-0.5 cursor-pointer text-gray-500"
+                    />
+                  </div>
+                  <div>
+                    <HiOutlineTrash
+                      onClick={() => setDeleteProduct(product._id)}
+                      className="cursor-pointer text-red-500 size-5"
+                    />
+                  </div>
                 </div>
               </TableCell>
             </TableRow>
           ))}
         </TableBody>
       </Table>
+
+      {!!editProduct && (
+        <Modal
+          type="form"
+          title={"Edit Product"}
+          variant="submit"
+          onClose={() => setEditProduct(null)}
+          show={!!editProduct}
+          onConfirm={handleEditProduct}
+        >
+          <AddProduct variant="edit" product={editProduct} />
+        </Modal>
+      )}
+
       {!!deleteProduct && (
         <Modal
           title={"Delete Product"}
