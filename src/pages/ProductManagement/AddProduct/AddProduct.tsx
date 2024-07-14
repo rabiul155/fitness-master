@@ -1,30 +1,21 @@
 import InputField from "@/components/shared/InputField/InputField";
 import { Button } from "@/components/ui/button";
-import {
-  useCreateProductMutation,
-  useUpdateProductMutation,
-} from "@/redux/features/product/productApi";
+import { useCreateProductMutation } from "@/redux/features/product/productApi";
 import { ProductType } from "@/types";
 import { useFormik } from "formik";
 import { toast } from "sonner";
 
-type PropsType = {
-  product?: ProductType;
-  variant?: "create" | "edit";
-};
-
-function AddProduct(props: PropsType) {
+function AddProduct() {
   const [createProductApi] = useCreateProductMutation();
-  const [updateProductApi] = useUpdateProductMutation();
 
   const initialValues = {
-    name: props.product?.name || "",
-    category: props.product?.category || "",
-    image: props.product?.image || "",
-    price: props.product?.price || "",
-    rating: props.product?.rating || "",
-    stock: props.product?.stock || "",
-    description: props.product?.description || "",
+    name: "",
+    category: "",
+    image: "",
+    price: "",
+    rating: "",
+    stock: "",
+    description: "",
   };
 
   const formik = useFormik({
@@ -32,13 +23,8 @@ function AddProduct(props: PropsType) {
     onSubmit: async (values) => {
       console.log(values);
       try {
-        if (props.variant === "edit") {
-          await updateProductApi({ id: props.product?._id, data: values });
-          toast("Product updated");
-        } else {
-          await createProductApi(values);
-          toast("Product created");
-        }
+        await createProductApi(values);
+        toast("Product created");
       } catch (err) {
         console.log(err);
       }

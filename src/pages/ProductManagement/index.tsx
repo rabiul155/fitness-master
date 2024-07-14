@@ -2,7 +2,6 @@ import Loading from "@/components/shared/Loading/Loading";
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
   TableHead,
   TableHeader,
@@ -17,9 +16,9 @@ import img from "@/assets/benefit-2.jpg";
 import { FaEdit } from "react-icons/fa";
 import { HiOutlineTrash } from "react-icons/hi";
 import Modal from "@/components/shared/Modal/Modal";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { toast } from "sonner";
-import AddProduct from "./AddProduct/AddProduct";
+import EditProductModal from "@/components/shared/Modal/EditProductModal";
 
 function ProductManagement() {
   const [deleteProduct, setDeleteProduct] = useState("");
@@ -42,7 +41,6 @@ function ProductManagement() {
       setDeleteProduct("");
     }
   };
-  const handleEditProduct = () => {};
 
   return (
     <div className="mx-4">
@@ -90,18 +88,15 @@ function ProductManagement() {
         </TableBody>
       </Table>
 
-      {/* {!!editProduct && (
-        <Modal
-          type="form"
+      {!!editProduct && (
+        <EditProductModal
           title={"Edit Product"}
-          variant="submit"
+          product={editProduct}
           onClose={() => setEditProduct(null)}
           show={!!editProduct}
-          onConfirm={handleEditProduct}
-        >
-          <AddProduct variant="edit" product={editProduct} />
-        </Modal>
-      )} */}
+          onConfirm={() => setEditProduct(null)}
+        ></EditProductModal>
+      )}
 
       {!!deleteProduct && (
         <Modal
