@@ -90,7 +90,7 @@ function ProductManagement() {
         </TableBody>
       </Table>
 
-      {!!editProduct && (
+      {/* {!!editProduct && (
         <Modal
           type="form"
           title={"Edit Product"}
@@ -101,7 +101,7 @@ function ProductManagement() {
         >
           <AddProduct variant="edit" product={editProduct} />
         </Modal>
-      )}
+      )} */}
 
       {!!deleteProduct && (
         <Modal

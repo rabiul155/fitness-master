@@ -12,7 +12,6 @@ import { FaXmark } from "react-icons/fa6";
 type PropsType = {
   show: boolean;
   title: string;
-  variant: "submit" | "delete";
   onConfirm: () => void;
   onClose: () => void;
   children: React.ReactNode;
@@ -46,36 +45,28 @@ const Modal = (props: PropsType) => {
               leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
             >
               <DialogPanel className="relative transform rounded-lg bg-white px-4 pt-5 pb-4 text-left shadow-xl transition-all sm:my-8 w-full mx-4 sm:w-full sm:max-w-lg sm:p-6">
-                <DialogTitle className="font-bold ">{props.title}</DialogTitle>
+                <DialogTitle className="font-bold">{props.title}</DialogTitle>
+
                 <button
                   onClick={props.onClose}
                   className="absolute top-2 right-2 p-2 rounded-full text-gray-800 hover:bg-gray-100"
                 >
                   <FaXmark size={20} />
                 </button>
-
-                <div className="py-6">{props.children}</div>
-
-                <div className="flex justify-end mt-4">
-                  {props.variant === "submit" && (
-                    <Button
-                      variant={"secondary"}
-                      className="h-8"
-                      onClick={props.onConfirm}
-                    >
-                      Submit
-                    </Button>
-                  )}
-                  {props.variant === "delete" && (
-                    <Button
-                      variant={"destructive"}
-                      className="h-8"
-                      onClick={props.onConfirm}
-                    >
-                      Delete
-                    </Button>
-                  )}
-                </div>
+                <form onSubmit={props.onConfirm} className="py-2">
+                  <hr />
+                  <div className="py-6">{props.children}</div>
+                  <Button
+                    variant={"secondary"}
+                    type="submit"
+                    className="h-8"
+                    onClick={() => {
+                      props.onConfirm();
+                    }}
+                  >
+                    Submit
+                  </Button>
+                </form>
               </DialogPanel>
             </TransitionChild>
           </div>
