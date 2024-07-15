@@ -29,7 +29,8 @@ function Checkout() {
 
   const products = data.data.map((cartProduct: CartProductType) => {
     return {
-      _id: cartProduct.product._id,
+      cartId: cartProduct._id,
+      product: cartProduct.product,
       quantity: cartProduct.quantity,
     };
   });

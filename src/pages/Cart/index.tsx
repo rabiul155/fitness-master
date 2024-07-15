@@ -38,7 +38,7 @@ function Cart() {
     return <Loading />;
   }
 
-  if (data.data.length === 0) {
+  if (data?.data?.length === 0) {
     return (
       <h2 className=" text-xl mt-12 font-bold text-center text-yellow-400 ">
         You haven't Order Yet. Please, Order First

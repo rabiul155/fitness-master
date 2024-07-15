@@ -1,8 +1,10 @@
 import InputField from "@/components/shared/InputField/InputField";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
+import { useCreateCheckoutMutation } from "@/redux/features/checkout/checkoutApi";
 import { useFormik } from "formik";
 import { useState } from "react";
+import { toast } from "sonner";
 
 type PropsType = {
   products: {
@@ -13,6 +15,7 @@ type PropsType = {
 
 function CheckoutForm(props: PropsType) {
   const [active, setActive] = useState(false);
+  const [createCheckoutApi] = useCreateCheckoutMutation();
 
   const initialValues = {
     name: "",
@@ -21,11 +24,17 @@ function CheckoutForm(props: PropsType) {
   };
   const formik = useFormik({
     initialValues,
-    onSubmit: (values) => {
+    onSubmit: async (values) => {
       const payload = {
         user: values,
         products: props.products,
       };
+      try {
+        await createCheckoutApi(payload);
+        toast("Order confirm");
+      } catch (err) {
+        toast("Failed");
+      }
       console.log(payload);
     },
   });

@@ -69,8 +69,9 @@ function ProductCard(props: PropsType) {
           <CardTitle className="my-2 text-2xl text-gray-800 font-bold">
             {props.product?.name}
           </CardTitle>
-          <div className="text-gray-800 text-lg font-semibold">
-            Category : {props.product.category}
+          <div className="text-gray-800 text-lg font-semibold flex justify-between">
+            <span>Category : {props.product.category}</span>
+            <span> Stock : {props.product.stock}</span>
           </div>
         </CardContent>
 

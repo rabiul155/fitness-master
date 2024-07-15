@@ -26,7 +26,12 @@ function Product() {
     }
   }, [category]);
 
-  const { data, isLoading } = useGetProductQuery(query);
+  const { data, isLoading, refetch } = useGetProductQuery(query);
+
+  useEffect(() => {
+    refetch();
+  }, []);
+
   if (isLoading) {
     return <Loading />;
   }
