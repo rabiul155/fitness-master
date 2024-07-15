@@ -20,6 +20,7 @@ function CheckoutForm(props: PropsType) {
   const initialValues = {
     name: "",
     email: "",
+    phone: "",
     address: "",
   };
   const formik = useFormik({
@@ -50,6 +51,13 @@ function CheckoutForm(props: PropsType) {
       <InputField
         label="Email"
         name="email"
+        type="email"
+        onChange={formik.handleChange}
+        value={formik.values.email}
+      />
+      <InputField
+        label="Phone"
+        name="phone"
         onChange={formik.handleChange}
         value={formik.values.email}
       />

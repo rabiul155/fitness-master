@@ -23,6 +23,10 @@ function Navbar() {
       link: "/cart",
     },
     {
+      nav: "Orders",
+      link: "/orders",
+    },
+    {
       nav: "About",
       link: "/about",
     },

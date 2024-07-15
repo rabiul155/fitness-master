@@ -14,6 +14,7 @@ import NotFound from "@/pages/NotFound";
 import About from "@/pages/About";
 import AddProduct from "@/pages/ProductManagement/AddProduct/AddProduct";
 import ManageProductLayout from "@/layouts/ManageProductLayout";
+import Orders from "@/pages/Orders";
 
 const router = createBrowserRouter([
   {
@@ -57,6 +58,10 @@ const router = createBrowserRouter([
       {
         path: "about",
         element: <About />,
+      },
+      {
+        path: "orders",
+        element: <Orders />,
       },
     ],
   },
