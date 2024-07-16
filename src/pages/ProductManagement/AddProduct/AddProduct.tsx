@@ -2,7 +2,9 @@ import InputField from "@/components/shared/InputField/InputField";
 import { Button } from "@/components/ui/button";
 import { useCreateProductMutation } from "@/redux/features/product/productApi";
 import { ProductType } from "@/types";
+import { imageHostToImgBB } from "@/utils/imageHostToImgBB";
 import { useFormik } from "formik";
+import { useState } from "react";
 import { toast } from "sonner";
 
 function AddProduct() {
@@ -21,10 +23,12 @@ function AddProduct() {
   const formik = useFormik({
     initialValues,
     onSubmit: async (values) => {
-      console.log(values);
+      const image = await imageHostToImgBB(values.image);
+      values.image = image;
       try {
         await createProductApi(values);
-        toast("Product created");
+        toast("Product created successfully.");
+        formik.resetForm();
       } catch (err) {
         console.log(err);
       }
@@ -47,12 +51,20 @@ function AddProduct() {
             value={formik.values.category}
           />
 
-          <InputField
-            label="Product image"
-            name="image"
-            onChange={formik.handleChange}
-            value={formik.values.image}
-          />
+          <div className="flex flex-col gap-1">
+            <label className="mx-1 text-sm" htmlFor="image">
+              Image
+            </label>
+            <input
+              className="w-full border rounded-md p-1"
+              type="file"
+              onChange={(event) => {
+                if (event.target.files) {
+                  formik.setFieldValue("image", event.target.files[0]);
+                }
+              }}
+            />
+          </div>
           <InputField
             label="Product price"
             name="price"
