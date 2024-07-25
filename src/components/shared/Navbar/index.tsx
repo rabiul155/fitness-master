@@ -1,6 +1,6 @@
 import { useState } from "react";
-
-import { Link, useLocation, useParams } from "react-router-dom";
+import logo from "@/assets/fitness.png";
+import { Link, useLocation } from "react-router-dom";
 import { FaXmark, FaBarsStaggered } from "react-icons/fa6";
 
 type NavItem = {
@@ -49,8 +49,12 @@ function Navbar() {
       <div className=" h-[10vh] bg-[#f6f7fb] shadow-md">
         <div className=" flex h-full justify-between items-center mx-auto w-[90%]">
           <div className=" flex items-center gap-12">
-            <Link to={"/"} className="text-xl font-bold flex gap-2 ">
-              Fitness
+            <Link
+              to={"/"}
+              className="text-xl font-bold flex items-center gap-2 "
+            >
+              <img className="h-6 w-8" src={logo} alt="" />
+              <span>Fitness</span>
               <span className="  text-yellow-500">Master</span>
             </Link>
             <ul className="hidden md:flex justify-center items-center gap-6">
