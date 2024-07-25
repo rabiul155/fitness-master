@@ -69,20 +69,23 @@ function Product() {
       />
 
       {/* card section */}
-      <div className="w-[90%] mx-auto grid grid-cols-1 md:grid-cols-3 gap-12">
-        {data.data.length ? (
-          data.data
+
+      {data.data.length > 0 ? (
+        <div className="w-[90%] mx-auto grid grid-cols-1 md:grid-cols-3 gap-12">
+          {data.data
             .slice((page - 1) * limit, page * limit)
             .map((product: ProductType) => (
               <ProductCard key={product._id} product={product}></ProductCard>
-            ))
-        ) : (
-          <div className="text-center">No Data Found</div>
-        )}
-      </div>
+            ))}
+        </div>
+      ) : (
+        <div className="text-center text-xl m-8 font-bold text-yellow-400 ">
+          No product found
+        </div>
+      )}
 
       {/* paginate */}
-      {data.data.length && (
+      {data.data.length > 0 && (
         <div>
           <PaginationPanel
             length={data.data.length}
