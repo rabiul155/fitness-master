@@ -1,6 +1,5 @@
 import { CartProductType } from "@/types";
 import { FaTrashAlt } from "react-icons/fa";
-import img from "@/assets/benefit-2.jpg";
 import { useUpdateCartProductMutation } from "@/redux/features/cart/cartApi";
 import { toast } from "sonner";
 
@@ -46,7 +45,11 @@ function CartProduct(props: PropsType) {
         <div className=" flex items-center">
           <div className="">
             <div className="w-24 rounded-xl">
-              <img className=" object-cover object-center" alt="" src={img} />
+              <img
+                className=" object-cover object-center"
+                alt=""
+                src={product.image}
+              />
             </div>
           </div>
           <div className="px-6">

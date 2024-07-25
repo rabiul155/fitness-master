@@ -24,16 +24,16 @@ const category = [
 
 const limit = [
   {
-    label: "2",
-    value: "2",
-  },
-  {
     label: "3",
     value: "3",
   },
   {
-    label: "4",
-    value: "4",
+    label: "6",
+    value: "6",
+  },
+  {
+    label: "9",
+    value: "9",
   },
 ];
 
@@ -57,7 +57,7 @@ type FilteringProps = {
 function Filtering(props: FilteringProps) {
   return (
     <div className="bg-slate-100">
-      <div className="w-[90%] flex justify-between mx-auto py-3">
+      <div className="w-[90%] flex flex-col lg:flex-row gap-4 justify-between mx-auto py-3">
         <div>
           <SelectField
             label="Category"
@@ -76,7 +76,7 @@ function Filtering(props: FilteringProps) {
             onChange={(e) => props.handleSearchParams("search", e.target.value)}
           />
         </div>
-        <div className="flex gap-4">
+        <div className="flex flex-col lg:flex-row gap-4">
           <SelectField
             label="Limit"
             classNames="w-20"
@@ -90,14 +90,14 @@ function Filtering(props: FilteringProps) {
             placeholder="Sort product"
             handleValueChange={(val) => props.handleSearchParams("sort", val)}
           />
-          <Button
-            variant="outline"
-            className="h-8"
-            onClick={props.handleClearFilter}
-          >
-            Clear Filer
-          </Button>
         </div>
+        <Button
+          variant="outline"
+          className="h-8 w-auto"
+          onClick={props.handleClearFilter}
+        >
+          Clear Filter
+        </Button>
       </div>
     </div>
   );

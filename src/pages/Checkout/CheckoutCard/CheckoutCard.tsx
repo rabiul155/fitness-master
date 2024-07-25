@@ -1,7 +1,5 @@
 import { CartProductType } from "@/types";
 
-import img from "@/assets/benefit-2.jpg";
-
 type PropsType = {
   cartProduct: CartProductType;
 };
@@ -18,7 +16,11 @@ function CheckoutCard(props: PropsType) {
         <div className=" flex items-center">
           <div className="">
             <div className="w-24 rounded-xl">
-              <img className=" object-cover object-center" alt="" src={img} />
+              <img
+                className=" object-cover object-center"
+                alt=""
+                src={product.image}
+              />
             </div>
           </div>
           <div className="px-6">

@@ -1,10 +1,8 @@
 import InputField from "@/components/shared/InputField/InputField";
 import { Button } from "@/components/ui/button";
 import { useCreateProductMutation } from "@/redux/features/product/productApi";
-import { ProductType } from "@/types";
 import { imageHostToImgBB } from "@/utils/imageHostToImgBB";
 import { useFormik } from "formik";
-import { useState } from "react";
 import { toast } from "sonner";
 
 function AddProduct() {

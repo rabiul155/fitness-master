@@ -9,7 +9,6 @@ import {
 } from "@/components/ui/card";
 import { Link } from "react-router-dom";
 
-import image from "@/assets/benefit-2.jpg";
 import { useAddToCartMutation } from "@/redux/features/cart/cartApi";
 import { toast } from "sonner";
 
@@ -37,14 +36,14 @@ function ProductCard(props: PropsType) {
     addToCartProduct(payload);
   };
   return (
-    <div className="flex justify-center items-center">
+    <div className="w-full">
       <Card className=" rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300">
         <Link className="cursor-pointer" to={`/products/${props.product._id}`}>
           <CardHeader className="p-0 rounded-t-lg overflow-hidden">
             <img
-              src={image}
+              src={props.product?.image}
               className="h-[280px] w-full object-cover rounded-t-lg transition-transform duration-300 hover:scale-105"
-              alt={props.product?.image}
+              alt=""
             />
           </CardHeader>
         </Link>

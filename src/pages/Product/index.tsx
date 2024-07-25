@@ -26,7 +26,7 @@ function Product() {
     }
   }, [category]);
 
-  const { data, isLoading, refetch } = useGetProductQuery(query);
+  const { data, isLoading, isError, refetch } = useGetProductQuery(query);
 
   useEffect(() => {
     refetch();
@@ -34,6 +34,10 @@ function Product() {
 
   if (isLoading) {
     return <Loading />;
+  }
+
+  if (isError) {
+    return <div>Something went wrong</div>;
   }
 
   const handleLimit = (field: string, value: string) => {

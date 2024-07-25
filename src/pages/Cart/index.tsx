@@ -12,7 +12,7 @@ import { Link } from "react-router-dom";
 import Loading from "@/components/shared/Loading/Loading";
 
 function Cart() {
-  const { data, isLoading, refetch } = useGetCartProductQuery(null);
+  const { data, isLoading, isError, refetch } = useGetCartProductQuery(null);
   const [deleteProduct, setDeleteProduct] = useState<CartProductType | null>();
 
   const [deleteCartProduct] = useDeleteCartProductMutation();
@@ -38,6 +38,10 @@ function Cart() {
     return <Loading />;
   }
 
+  if (isError) {
+    return <div>Something went wrong</div>;
+  }
+
   if (data?.data?.length === 0) {
     return (
       <h2 className=" text-xl mt-12 font-bold text-center text-yellow-400 ">
@@ -46,7 +50,7 @@ function Cart() {
     );
   }
 
-  const totalPrice = data?.data.reduce(
+  const totalPrice = data?.data?.reduce(
     (sum: number, cartProduct: CartProductType) => {
       return sum + cartProduct.product.price * cartProduct.quantity;
     },

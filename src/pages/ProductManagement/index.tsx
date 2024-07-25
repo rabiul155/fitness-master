@@ -12,7 +12,6 @@ import {
   useGetProductQuery,
 } from "@/redux/features/product/productApi";
 import { ProductType } from "@/types";
-import img from "@/assets/benefit-2.jpg";
 import { FaEdit } from "react-icons/fa";
 import { HiOutlineTrash } from "react-icons/hi";
 import Modal from "@/components/shared/Modal/Modal";
@@ -61,7 +60,7 @@ function ProductManagement() {
             <TableRow key={index}>
               <TableCell className="font-medium">{index + 1}</TableCell>
               <TableCell className="font-medium">
-                <img className="h-12 w-16 rounded" src={img} alt="" />
+                <img className="h-12 w-16 rounded" src={product.image} alt="" />
               </TableCell>
               <TableCell className="font-medium">{product.name}</TableCell>
               <TableCell className="font-medium">{product.category}</TableCell>

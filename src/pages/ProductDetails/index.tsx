@@ -4,26 +4,23 @@ import { toast } from "sonner";
 import { FaRegHeart, FaStar } from "react-icons/fa";
 import { useAddToCartMutation } from "@/redux/features/cart/cartApi";
 import { useGetSingleProductQuery } from "@/redux/features/product/productApi";
-
-import img from "@/assets/benefit-2.jpg";
+import Loading from "@/components/shared/Loading/Loading";
 
 function ProductDetails() {
   const [quantity, setQuantity] = useState("1");
   const { id } = useParams();
-  const { data, isLoading } = useGetSingleProductQuery(id);
+  const { data, isLoading, isError } = useGetSingleProductQuery(id);
   const [addToCartProduct, results] = useAddToCartMutation();
   if (isLoading) {
-    return "Loading...";
+    return <Loading />;
   }
 
   if (results.isSuccess) {
-    console.log("hit");
     toast("Product added to cart successfully", {
       description: `Date : ${new Date(Date.now()).toLocaleString()}`,
     });
   }
-
-  console.log(results);
+  if (isError) return <div>Something went wrong</div>;
 
   const addToCart = () => {
     const payload = {
@@ -37,18 +34,18 @@ function ProductDetails() {
     <div className="text-gray-700 grid grid-cols-1 lg:grid-cols-8 gap-6 m-6">
       <div className=" hidden lg:block">
         <div className=" mb-3 p-3 border ">
-          <img src={img} alt="none" />
+          <img src={data.data.image} alt="none" />
         </div>
         <div className=" mb-3 p-3 border ">
-          <img src={img} alt="none" />
+          <img src={data.data.image} alt="none" />
         </div>
         <div className=" mb-3 p-3 border ">
-          <img src={img} alt="none" />
+          <img src={data.data.image} alt="none" />
         </div>
       </div>
       <div className=" lg:col-span-3">
         <div className=" mb-3 p-4 border">
-          <img src={img} alt="none" />
+          <img src={data.data.image} alt="none" />
         </div>
       </div>
       <div className=" lg:col-span-4">
