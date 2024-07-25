@@ -23,9 +23,8 @@ function CartProduct(props: PropsType) {
         id: props.cartProduct._id,
         payload: { quantity: props.cartProduct.quantity - 1 },
       });
-      toast("Updating complete");
     } catch (error) {
-      toast("Error while updating");
+      toast("Something wrong please try again");
     }
   };
   const handleIncrease = async () => {
@@ -34,9 +33,8 @@ function CartProduct(props: PropsType) {
         id: props.cartProduct._id,
         payload: { quantity: props.cartProduct.quantity + 1 },
       });
-      toast("Updating complete");
     } catch (error) {
-      toast("Error while updating");
+      toast("Something wrong please try again");
     }
   };
   return (

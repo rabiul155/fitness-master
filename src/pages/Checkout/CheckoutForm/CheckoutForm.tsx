@@ -4,6 +4,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { useCreateCheckoutMutation } from "@/redux/features/checkout/checkoutApi";
 import { useFormik } from "formik";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 
 type PropsType = {
@@ -14,6 +15,7 @@ type PropsType = {
 };
 
 function CheckoutForm(props: PropsType) {
+  const navigate = useNavigate();
   const [active, setActive] = useState(false);
   const [createCheckoutApi] = useCreateCheckoutMutation();
 
@@ -33,6 +35,7 @@ function CheckoutForm(props: PropsType) {
       try {
         await createCheckoutApi(payload);
         toast("Order confirm");
+        navigate("/orders");
       } catch (err) {
         toast("Failed");
       }
@@ -59,7 +62,7 @@ function CheckoutForm(props: PropsType) {
         label="Phone"
         name="phone"
         onChange={formik.handleChange}
-        value={formik.values.email}
+        value={formik.values.phone}
       />
       <InputField
         label="Address"

@@ -1,12 +1,34 @@
 import InputField from "@/components/shared/InputField/InputField";
+import SelectCategory from "@/components/shared/SelectCategory/SelectCategory";
 import { Button } from "@/components/ui/button";
 import { useCreateProductMutation } from "@/redux/features/product/productApi";
 import { imageHostToImgBB } from "@/utils/imageHostToImgBB";
 import { useFormik } from "formik";
+import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
+
+const category = [
+  {
+    label: "Dumbbells",
+    value: "Dumbbells",
+  },
+  {
+    label: "Treadmills",
+    value: "Treadmills",
+  },
+  {
+    label: "Weight Plates",
+    value: "Weight Plates",
+  },
+  {
+    label: "Exercise Bike",
+    value: "Exercise Bike",
+  },
+];
 
 function AddProduct() {
   const [createProductApi] = useCreateProductMutation();
+  const navigate = useNavigate();
 
   const initialValues = {
     name: "",
@@ -27,6 +49,7 @@ function AddProduct() {
         await createProductApi(values);
         toast("Product created successfully.");
         formik.resetForm();
+        navigate("/products");
       } catch (err) {
         console.log(err);
       }
@@ -42,13 +65,13 @@ function AddProduct() {
             onChange={formik.handleChange}
             value={formik.values.name}
           />
-          <InputField
+          <SelectCategory
             label="Product category"
             name="category"
-            onChange={formik.handleChange}
-            value={formik.values.category}
+            items={category}
+            placeholder="Select Category"
+            handleValueChange={(val) => formik.setFieldValue("category", val)}
           />
-
           <div className="flex flex-col gap-1">
             <label className="mx-1 text-sm" htmlFor="image">
               Image
