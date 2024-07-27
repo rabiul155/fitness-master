@@ -1,4 +1,3 @@
-import React from "react";
 import g1 from "@/assets/gallery/g-1.jpg";
 import g2 from "@/assets/gallery/g-2.jpg";
 import g4 from "@/assets/gallery/g-4.jpg";

@@ -1,4 +1,3 @@
-import React from "react";
 import CompanyOverview from "./CompanyOverview/CompanyOverview";
 import Team from "./Team/Team";
 import Customer from "./Customer/Customer";
